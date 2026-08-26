@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邹娜 — 贸易经济 & AI应用实践者</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['-apple-system','BlinkMacSystemFont','"Segoe UI"',"Roboto",'"Helvetica Neue"',"Arial","'Noto Sans SC'","'PingFang SC'","'Microsoft YaHei'","sans-serif"],
+        mono: ['"SF Mono"',"Monaco","'Cascadia Code'","'Roboto Mono'","Consolas","monospace"],
+      },
+      colors: {
+        stone: {
+          50: '#fafaf9', 100: '#f5f5f4', 200: '#e7e5e4', 300: '#d6d3d1',
+          400: '#a8a29e', 500: '#78716c', 600: '#57534e', 700: '#44403c',
+          800: '#292524', 900: '#1c1917', 950: '#0c0a09',
+        },
+        accent: { DEFAULT: 'rgb(var(--brand-rgb) / <alpha-value>)', light: 'rgb(var(--brand-light-rgb) / <alpha-value>)', sub: 'var(--brand-sub)' },
+        teal: { DEFAULT: 'rgb(var(--brand2-rgb) / <alpha-value>)', light: 'rgb(var(--brand2-light-rgb) / <alpha-value>)' },
+        violet: { DEFAULT: 'rgb(var(--brand3-rgb) / <alpha-value>)', light: 'rgb(var(--brand2-light-rgb) / <alpha-value>)' },
+      },
+      borderRadius: { '2xl': '16px', xl: '12px' },
+      boxShadow: {
+        card: '0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)',
+        'card-lg': '0 20px 50px rgba(0,0,0,0.1), 0 8px 20px rgba(0,0,0,0.06)',
+        'card-dark': '0 4px 20px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2)',
+        'card-lg-dark': '0 20px 50px rgba(0,0,0,0.5), 0 8px 20px rgba(0,0,0,0.3)',
+      }
+    }
+  }
+}
+</script>
+<style>
+/* ===== 主题色：浅色 = 暖橙 / 深色 = 蓝紫 ===== */
+:root {
+  --brand: #ea580c;            /* 暖橙 */
+  --brand2: #f59e0b;           /* 琥珀 */
+  --brand3: #f97316;           /* 橙 */
+  --brand-rgb: 234 88 12;
+  --brand-light-rgb: 251 146 60;
+  --brand2-rgb: 245 158 11;
+  --brand2-light-rgb: 251 191 36;
+  --brand3-rgb: 249 115 22;
+  --brand-sub: rgba(234,88,12,0.10);
+  --det-port: radial-gradient(120% 70% at 50% -5%, rgba(249,115,22,.12), transparent 55%), radial-gradient(90% 50% at 100% 0%, rgba(245,158,11,.12), transparent 55%);
+  --det-hobby: radial-gradient(120% 70% at 50% -5%, rgba(244,114,182,.12), transparent 55%), radial-gradient(90% 50% at 100% 0%, rgba(251,191,36,.12), transparent 55%);
+  --card-games: linear-gradient(135deg,#f97316 0%,#fb923c 50%,#f43f5e 120%);
+  --card-music: linear-gradient(135deg,#f59e0b 0%,#ea580c 55%,#db2777 120%);
+}
+html.dark {
+  --brand: #818cf8;
+  --brand2: #8b5cf6;
+  --brand3: #c084fc;
+  --brand-rgb: 129 140 248;
+  --brand-light-rgb: 167 139 250;
+  --brand2-rgb: 139 92 246;
+  --brand2-light-rgb: 167 139 250;
+  --brand3-rgb: 192 132 252;
+  --brand-sub: rgba(129,140,248,0.12);
+  --det-port: radial-gradient(120% 70% at 50% -5%, rgba(99,102,241,.12), transparent 55%), radial-gradient(90% 50% at 100% 0%, rgba(139,92,246,.12), transparent 55%);
+  --card-games: linear-gradient(135deg,#06B6D4 0%,#3B82F6 50%,#8B5CF6 125%);
+  --card-music: linear-gradient(135deg,#7C3AED 0%,#6366F1 55%,#3B82F6 125%);
+}
+.reveal-item { opacity: 1; transform: translateY(0); }
+.js-loaded .reveal-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: opacity, transform;
+}
+.js-loaded .reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background: linear-gradient(180deg, var(--brand), var(--brand2));
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  border-radius: 2px;
+  animation: cursorBreathe 1.2s ease-in-out infinite;
+}
+@keyframes cursorBreathe {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.3; transform: scaleY(0.8); }
+}
+.typewriter-text {
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+#progressBar {
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: blobFloat 20s ease-in-out infinite;
+}
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(30px,-30px) scale(1.05); }
+  66% { transform: translate(-20px,20px) scale(0.95); }
+}
+
+.card-hover {
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--tw-shadow);
+}
+
+/* ===== 兴趣爱好 · 卡通可爱卡片 ===== */
+.hobby-card { transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease; }
+.hobby-card:hover { transform: translateY(-8px) rotate(-2deg); }
+.hobby-card:active { transform: translateY(-2px) scale(.97); }
+.hobby-icon { display: inline-block; transform-origin: 50% 80%; }
+.hobby-card:hover .hobby-icon { animation: iconWiggle .7s ease-in-out; }
+@keyframes iconWiggle {
+  0%, 100% { transform: rotate(0) scale(1); }
+  25% { transform: rotate(-7deg) scale(1.07); }
+  65% { transform: rotate(6deg) scale(1.07); }
+}
+
+/* ===== 作品集 · 活力设计卡片 ===== */
+.port-card {
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px));
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), filter .3s ease;
+}
+.port-card:hover { transform: translateY(-8px) rotate(-1deg) scale(1.02); filter: saturate(1.3) brightness(1.05); }
+.eq-bar { transform-origin: bottom; animation: eqBounce .9s ease-in-out infinite alternate; }
+@keyframes eqBounce { from { transform: scaleY(.22); } to { transform: scaleY(1); } }
+
+/* ===== 履历轴 · 藤蔓与花朵 ===== */
+.flower-mark { animation: flowerSway 3.5s ease-in-out infinite; transform-origin: 50% 85%; }
+@keyframes flowerSway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+.journey-row { align-items: flex-start; }
+/* ===== 履历轴 · 花苞闭合 / 点击盛开 / 卡片展开 ===== */
+.jnode { cursor: pointer; }
+.jnode .petal-group {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  transform: scale(.34);
+  transition: transform .6s cubic-bezier(.34,1.56,.64,1);
+}
+.jnode .sepal { opacity: 1; transition: opacity .5s ease; }
+.jnode.open .petal-group { transform: scale(1); }
+.jnode.open .sepal { opacity: 0; }
+.jnode .jcard { transition: box-shadow .3s ease, border-color .3s ease; }
+.jnode:hover .jcard { box-shadow: 0 10px 30px -12px rgba(120,90,60,.35); border-color: color-mix(in srgb, var(--brand) 40%, transparent); }
+.journey-full {
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height .55s ease, opacity .4s ease, margin-top .4s ease;
+}
+.jnode.open .journey-full { max-height: 1400px; opacity: 1; margin-top: .85rem; }
+.jhint { transition: opacity .25s ease; }
+.jnode.open .jhint { display: none; }
+.jclose { transition: background .2s ease, color .2s ease; }
+.jclose:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+/* ===== 详情内页（兴趣爱好 / 作品集） ===== */
+#detailOverlay { transition: opacity .3s ease, visibility .3s ease; }
+#detailOverlay.overlay-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+#detailPanel { transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s ease; }
+body.detail-open { overflow: hidden; }
+
+/* 详情内页：作品集(蓝紫科技·深色 / 暖橙·浅色) vs 兴趣爱好(暖色卡通) 风格区分 */
+#detailPanel[data-kind="portfolio"] #detailBody { background: var(--det-port); }
+#detailPanel[data-kind="hobby"] #detailBody { background: var(--det-hobby); }
+#detailPanel[data-kind="portfolio"] #detailTitle {
+  background: linear-gradient(135deg,var(--brand),var(--brand2),var(--brand3));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* 作品集 = 蓝紫/暖橙科技；兴趣爱好 = 暖色卡通（图标盒与返回按钮配色区分） */
+#detailPanel[data-kind="portfolio"] #detailIconWrap { background: linear-gradient(135deg,var(--brand) 0%,var(--brand2) 55%,var(--brand3) 100%); color:#fff; }
+#detailPanel[data-kind="hobby"] #detailIconWrap { background: linear-gradient(135deg,#fb7185 0%,#fbbf24 100%); color:#fff; }
+#detailPanel[data-kind="portfolio"] #detailBack:hover { border-color:var(--brand); color:var(--brand); }
+#detailPanel[data-kind="hobby"] #detailBack:hover { border-color:#fb7185; color:#db2777; }
+#detailPanel[data-kind="portfolio"] #detailBody .my-6.rounded-2xl.overflow-hidden { box-shadow:0 0 0 1px color-mix(in srgb, var(--brand) 25%, transparent), 0 18px 40px -18px color-mix(in srgb, var(--brand) 45%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar, .flower-mark, .hobby-card:hover .hobby-icon { animation: none; }
+  .hobby-card, .port-card, #detailPanel { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-loaded .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .blob { animation: none; }
+  .typewriter-cursor { animation: none; opacity: 1; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .reveal-item { opacity: 1 !important; transform: none !important; }
+  .shadow-card, .shadow-card-lg { box-shadow: none !important; border: 1px solid #ddd !important; }
+  #progressBar, #confettiCanvas, .blob, .grid-bg { display: none !important; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb { background: #44403c; }
+
+::selection { background: var(--brand); color: #fff; }
+
+/* ===== 深色夜空星空 ===== */
+#starsCanvas {
+  display: none;
+}
+html.dark #starsCanvas {
+  display: block;
+}
+/* 深色模式下让区块背景透出夜空与星星 */
+html.dark #highlights,
+html.dark #skills,
+html.dark #projects,
+html.dark #portfolio,
+html.dark #contact {
+  background-color: transparent !important;
+}
+
+/* ===== 移动端导航菜单 ===== */
+.mobile-link {
+  padding: 0.85rem 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #57534e;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: color 0.2s;
+}
+.dark .mobile-link { color: #d6d3d1; border-bottom-color: rgba(255,255,255,0.08); }
+.mobile-link:active { color: var(--brand); }
+
+/* ===== 履历轴横向滚动条 ===== */
+.journey-scroll { scrollbar-width: thin; scrollbar-color: rgba(140,140,140,.5) transparent; }
+.journey-scroll::-webkit-scrollbar { height: 6px; }
+.journey-scroll::-webkit-scrollbar-track { background: transparent; }
+.journey-scroll::-webkit-scrollbar-thumb { background: rgba(140,140,140,.45); border-radius: 3px; }
+.journey-scroll::-webkit-scrollbar-thumb:hover { background: rgba(140,140,140,.7); }
+
+/* ===== 移动端：收敛段落间距，避免拥挤 ===== */
+@media (max-width: 640px) {
+  section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .reveal-item.max-w-\[600px\] { margin-bottom: 2.5rem !important; }
+}
+</style>
+</head>
+<body class="bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100 transition-colors duration-400 overflow-x-hidden antialiased">
+
+<!-- 夜空星空（深色模式） -->
+<canvas id="starsCanvas" class="fixed inset-0 pointer-events-none" style="z-index:-1; display:none;"></canvas>
+
+<!-- 滚动进度条 -->
+<div id="progressBar" class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent to-teal z-[9999]"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9998]"></canvas>
+
+<!-- 导航 -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 border-b border-transparent">
+  <div class="max-w-[1100px] mx-auto px-6 h-[72px] flex items-center justify-between">
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="text-xl font-extrabold tracking-tight relative group">
+      简历
+      <span class="absolute -bottom-0.5 left-0 w-0 h-[2.5px] bg-gradient-to-r from-accent to-teal transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    
+    <ul class="hidden md:flex gap-5 list-none">
+      <li><a href="#highlights" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">亮点<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#experience" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">经历<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#journey" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">履历<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#projects" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">认证<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#portfolio" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">作品<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#skills" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">技能<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#hobbies" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">兴趣<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+      <li><a href="#contact" class="text-sm font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 relative py-1 transition-colors group">联系<span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full"></span></a></li>
+    </ul>
+
+    <button id="navToggle" class="md:hidden w-10 h-10 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors" aria-label="打开菜单" aria-expanded="false">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="flex items-center gap-2">
+      <button id="themeBtn" class="w-10 h-10 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-700 hover:text-stone-900 dark:hover:text-stone-100 transition-all hover:-translate-y-0.5 flex items-center justify-center shadow-card dark:shadow-card-dark" title="切换主题">
+        <svg id="themeIcon" class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+      <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-500 dark:text-stone-400 text-sm font-medium hover:bg-stone-900 dark:hover:bg-stone-100 hover:text-stone-50 dark:hover:text-stone-900 transition-all">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>打印</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 移动端导航菜单 -->
+<div id="mobileMenu" class="md:hidden fixed left-0 right-0 top-[72px] z-[990] bg-white/95 dark:bg-stone-900/95 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 hidden">
+  <nav class="px-6 py-2 flex flex-col">
+    <a href="#highlights" class="mobile-link">亮点</a>
+    <a href="#experience" class="mobile-link">经历</a>
+    <a href="#journey" class="mobile-link">履历</a>
+    <a href="#projects" class="mobile-link">认证</a>
+    <a href="#portfolio" class="mobile-link">作品</a>
+    <a href="#skills" class="mobile-link">技能</a>
+    <a href="#hobbies" class="mobile-link">兴趣</a>
+    <a href="#contact" class="mobile-link">联系</a>
+  </nav>
+</div>
+
+<!-- Hero -->
+<header class="min-h-screen flex items-center relative overflow-hidden pt-[72px]" id="hero">
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute inset-0 opacity-40 dark:opacity-20" style="background-image: linear-gradient(rgba(28,25,23,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(28,25,23,0.08) 1px,transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at center,black 0%,transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center,black 0%,transparent 70%);"></div>
+    <div class="blob w-[700px] h-[700px] bg-accent/40 -top-[15%] -right-[10%] animate-[blobFloat_20s_ease-in-out_infinite]"></div>
+    <div class="blob w-[600px] h-[600px] bg-teal/30 -bottom-[15%] -left-[10%] animate-[blobFloat_20s_ease-in-out_infinite_-7s]"></div>
+    <div class="blob w-[400px] h-[400px] bg-violet/25 top-[40%] left-[30%] animate-[blobFloat_20s_ease-in-out_infinite_-14s]"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-[1100px] mx-auto px-6">
+    <div class="inline-flex items-center gap-3 mb-8 px-4 py-2 bg-accent/5 dark:bg-accent/10 border border-stone-200 dark:border-stone-800 rounded-full font-mono text-xs text-accent">
+      <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+      <span>向未知发问 · 为智能赋形 · 大一</span>
+    </div>
+
+    <h1 class="text-[clamp(3rem,10vw,7rem)] font-black leading-[0.95] tracking-tight mb-6">
+      你好，我是<br>
+      <span class="bg-gradient-to-r from-accent to-teal bg-clip-text text-transparent">邹娜</span>
+    </h1>
+
+    <!-- 打字机叙事 -->
+    <div class="text-xl md:text-2xl text-stone-600 dark:text-stone-400 mb-6 h-[1.6em] flex items-center">
+      <span class="mr-2">我是</span>
+      <span id="typewriter" class="typewriter-text"></span>
+      <span class="typewriter-cursor"></span>
+    </div>
+
+    <p class="max-w-[560px] mb-10 text-lg md:text-xl leading-relaxed text-stone-600 dark:text-stone-400">
+      贸易经济专业在读学生，深耕 AI 应用开发与数字经济交叉领域。系统掌握 Prompt 工程、RAG、智能体构建等前沿技术，致力于探索大模型在跨境商贸、智能客服等商业场景的创新落地。
+    </p>
+
+    <div class="flex flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-12" id="heroContact">
+      <button id="emailBtn" data-user="1649955397" data-domain="qq.com" class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 bg-stone-900 dark:bg-stone-100 text-stone-50 dark:text-stone-900 rounded-lg font-semibold text-[0.9375rem] hover:-translate-y-1 transition-all shadow-card hover:shadow-card-lg dark:shadow-card-dark dark:hover:shadow-card-lg-dark cursor-pointer" title="点击复制邮箱地址">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span id="emailText">复制邮箱地址</span>
+      </button>
+      <button id="phoneBtn" data-phone="15870014624" class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 bg-transparent text-stone-900 dark:text-stone-100 border-[1.5px] border-stone-200 dark:border-stone-700 rounded-lg font-semibold text-[0.9375rem] hover:border-stone-900 dark:hover:border-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:-translate-y-1 transition-all cursor-pointer" title="点击复制电话号码">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span id="phoneText">15870014624</span>
+      </button>
+      <button id="githubBtn" class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 bg-transparent text-stone-900 dark:text-stone-100 border-[1.5px] border-stone-200 dark:border-stone-700 rounded-lg font-semibold text-[0.9375rem] hover:border-stone-900 dark:hover:border-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:-translate-y-1 transition-all cursor-pointer" title="GitHub 链接待补充">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </button>
+      <a href="#projects" class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-3.5 bg-transparent text-stone-900 dark:text-stone-100 border-[1.5px] border-stone-200 dark:border-stone-700 rounded-lg font-semibold text-[0.9375rem] hover:border-stone-900 dark:hover:border-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:-translate-y-1 transition-all">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        查看认证
+      </a>
+    </div>
+
+    <div id="heroTags" class="flex flex-wrap gap-2.5"></div>
+  </div>
+</header>
+
+<!-- Highlights -->
+<section class="py-28 relative bg-stone-100 dark:bg-stone-900" id="highlights">
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-700 to-transparent"></div>
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Highlights</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">成长亮点</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">用数据记录从团务骨干到 AI 实践者的每一步足迹</p>
+    </div>
+    <div id="hGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="py-28 relative" id="experience">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Experience</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">实践经历</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">在团组织与校园实践中锤炼组织能力，在 AI 学习中积累技术深度</p>
+    </div>
+
+    <div class="relative">
+      <div class="flex gap-1 p-1.5 bg-stone-100 dark:bg-stone-800 rounded-full w-fit border border-stone-200 dark:border-stone-700 mb-12 overflow-x-auto max-w-full" id="expTabs">
+        <button class="tab-btn active px-6 py-2.5 rounded-full text-sm font-semibold transition-all bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-card dark:shadow-card-dark whitespace-nowrap" data-tab="league">共青团员经历</button>
+        <button class="tab-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 whitespace-nowrap" data-tab="campus">校内职务</button>
+        <button class="tab-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 whitespace-nowrap" data-tab="intern">实习实训</button>
+      </div>
+      <div id="expPanels"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills 技能矩阵（位于实践经历之下） -->
+<section class="py-28 relative bg-stone-100 dark:bg-stone-900" id="skills">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Skills</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">技能矩阵</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">商业思维与 AI 技术并重，构建复合型能力体系</p>
+    </div>
+    <div id="skillGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="py-28 relative" id="education">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Education</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">教育背景</h2>
+    </div>
+    <div id="eduGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+  </div>
+</section>
+
+<!-- Projects / Certifications -->
+<section class="py-28 relative bg-stone-100 dark:bg-stone-900" id="projects">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Certifications</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">专业认证</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">聚焦 AI 全栈能力构建，完成多项行业权威认证</p>
+    </div>
+
+    <div class="relative">
+      <div class="flex gap-1 p-1.5 bg-stone-100 dark:bg-stone-800 rounded-full w-fit border border-stone-200 dark:border-stone-700 mb-12 overflow-x-auto max-w-full" id="projTabs">
+        <button class="tab-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-card dark:shadow-card-dark whitespace-nowrap" data-tab="all">全部认证</button>
+        <button class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 whitespace-nowrap" data-tab="ai">AI 开发</button>
+        <button class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 whitespace-nowrap" data-tab="platform">平台认证</button>
+      </div>
+      <div id="projGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio 作品集（活力设计风格） -->
+<section class="py-28 relative bg-stone-100 dark:bg-stone-900" id="portfolio">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Portfolio</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">作品集</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">用作品说话 —— 每一件都是热爱的证据 · 持续更新中</p>
+    </div>
+    <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"></div>
+  </div>
+</section>
+
+<!-- Hobbies 兴趣爱好（卡通可爱卡片） -->
+<section class="py-28 relative overflow-hidden" id="hobbies">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Hobbies</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">兴趣爱好</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">点击卡片，走进我的小世界</p>
+    </div>
+    <div id="hobbyGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[860px]"></div>
+  </div>
+</section>
+
+<!-- Journey 履历轴（藤蔓时间线） -->
+<section class="py-28 relative overflow-hidden" id="journey">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <div class="reveal-item max-w-[600px] mb-16">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Journey</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-4">履痕卷</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400">像枝桠一样自由生长，每开出一朵花，就是一段值得纪念的旅程。轻触花苞，看它为你盛开。</p>
+    </div>
+    <div id="journeyWrap" class="relative"></div>
+    <p class="sm:hidden mt-5 flex items-center gap-2 text-xs text-stone-400 dark:text-stone-500 font-medium"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>轻触花苞展开故事，上下滑动浏览更多<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="py-28 relative overflow-hidden bg-stone-100 dark:bg-stone-900" id="contact">
+  <div class="absolute inset-0 bg-gradient-to-br from-orange-400/5 to-amber-400/5 dark:from-indigo-400/[0.03] dark:to-violet-400/[0.03]"></div>
+  <div class="relative max-w-[640px] mx-auto px-6 text-center">
+    <div class="reveal-item">
+      <span class="font-mono text-xs font-semibold tracking-widest uppercase text-accent block mb-4">Contact</span>
+      <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-tight tracking-tight mb-6">期待与你交流<br>AI 与商业的无限可能</h2>
+      <p class="text-lg text-stone-500 dark:text-stone-400 mb-10">无论是技术探讨、项目合作还是学习交流，都欢迎随时联系我。期待在 AI + 贸易经济的交叉领域创造更多价值。</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#heroContact" class="confetti-trigger inline-flex items-center gap-3 px-8 py-4 bg-stone-900 dark:bg-stone-100 text-stone-50 dark:text-stone-900 rounded-lg font-bold text-base hover:-translate-y-1 transition-all shadow-card hover:shadow-card-lg dark:shadow-card-dark dark:hover:shadow-card-lg-dark">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          联系我
+        </a>
+        <a href="#" onclick="window.print();return false;" class="inline-flex items-center gap-2 px-7 py-4 bg-transparent text-stone-900 dark:text-stone-100 border-[1.5px] border-stone-200 dark:border-stone-700 rounded-lg font-semibold hover:border-stone-900 dark:hover:border-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:-translate-y-1 transition-all">
+          <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          下载简历 PDF
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 border-t border-stone-200 dark:border-stone-800 text-center">
+  <div class="max-w-[1100px] mx-auto px-6">
+    <p class="text-sm text-stone-400 dark:text-stone-600">© 邹娜. 保留所有权利。</p>
+    <p class="font-mono text-sm text-stone-400 dark:text-stone-600 mt-2">最后更新：2026年8月</p>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="btt" class="no-print fixed bottom-8 right-8 w-12 h-12 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 dark:text-stone-400 flex items-center justify-center opacity-0 translate-y-5 transition-all shadow-card hover:bg-accent hover:text-white hover:border-accent hover:-translate-y-1 z-50" aria-label="返回顶部">
+  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-20 px-6 py-3.5 bg-stone-900 dark:bg-stone-100 text-stone-50 dark:text-stone-900 rounded-lg font-semibold text-sm shadow-card-lg dark:shadow-card-lg-dark opacity-0 transition-all duration-500 z-[9999] pointer-events-none" style="transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);">
+  已复制到剪贴板
+</div>
+
+<!-- 详情内页（兴趣爱好 / 作品集 点击卡片进入） -->
+<div id="detailOverlay" class="no-print fixed inset-0 z-[10000] overlay-hidden" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm" data-close-detail></div>
+  <div id="detailPanel" class="absolute inset-x-0 bottom-0 top-0 md:inset-8 lg:inset-12 bg-stone-50 dark:bg-stone-900 md:rounded-3xl shadow-card-lg dark:shadow-card-lg-dark overflow-hidden flex flex-col translate-y-8 md:translate-y-4 md:scale-[0.98]">
+    <div class="flex items-center gap-4 px-5 md:px-8 py-4 border-b border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 shrink-0">
+      <button id="detailBack" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-stone-200 dark:border-stone-700 text-sm font-semibold text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:border-accent/50 hover:text-accent transition-all shrink-0" aria-label="返回上一页">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        返回
+      </button>
+      <div id="detailIconWrap" class="w-11 h-11 rounded-2xl bg-stone-100 dark:bg-stone-800 flex items-center justify-center overflow-hidden shrink-0"></div>
+      <div class="min-w-0">
+        <h3 id="detailTitle" class="text-lg font-extrabold text-stone-900 dark:text-stone-100 truncate"></h3>
+        <p id="detailSub" class="text-sm text-stone-400 dark:text-stone-500 truncate"></p>
+      </div>
+    </div>
+    <div id="detailBody" class="flex-1 overflow-y-auto"></div>
+  </div>
+</div>
+
+<!-- 证书图片查看器（单张翻看，点击图片看下一张） -->
+<div id="imgLightbox" class="no-print fixed inset-0 z-[15000] hidden items-center justify-center" role="dialog" aria-modal="true" aria-label="证书图片查看">
+  <div id="imgLightboxBg" class="absolute inset-0 bg-stone-950/92 backdrop-blur-md"></div>
+  <button type="button" id="imgClose" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl flex items-center justify-center transition-all z-20" aria-label="关闭">✕</button>
+  <button type="button" id="imgPrev" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center transition-all z-20" aria-label="上一张">‹</button>
+  <button type="button" id="imgNext" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center transition-all z-20" aria-label="下一张">›</button>
+  <div class="relative z-10 flex flex-col items-center gap-4 px-4 pointer-events-none">
+    <div id="imgCounter" class="text-white/85 font-mono text-sm tracking-wider"></div>
+    <button type="button" id="imgStage" class="pointer-events-auto block cursor-pointer" title="点击查看下一张">
+      <img id="imgEl" src="" alt="证书图片" class="max-h-[78vh] max-w-[90vw] md:max-w-[68vw] rounded-2xl shadow-2xl bg-stone-900/40 object-contain" />
+    </button>
+    <div class="text-white/55 text-xs sm:text-sm font-medium">点击图片查看下一张 · 按 Esc 或 ✕ 关闭</div>
+  </div>
+</div>
+
+<script>
+// ==================== 数据（邹娜完整信息） ====================
+const DATA = {
+  skills: ["Prompt工程","RAG检索","智能体构建","AIGC设计","模型微调","Python","数据分析","贸易经济","市场营销","跨境电商","团务组织","内容运营"],
+  heroTags: [
+    {t:"AI产品化", icon:"M12 3l1.9 4.6L18 9.5l-4.1 1.9L12 16l-1.9-4.6L6 9.5l4.1-1.9zM19 14l.9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9z"},
+    {t:"Python", icon:"M8 6l-6 6 6 6M16 6l6 6-6 6"},
+    {t:"数据分析", icon:"M18 20V10M12 20V4M6 20v-6"},
+    {t:"机器学习", icon:"M12 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0M5 16m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0M19 16m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0M12 7l-6 9M12 7l6 9M7 16h10"},
+    {t:"全栈思维", icon:"M12 2l10 5-10 5-10-5 10-5zM2 17l10 5 10-5M2 12l10 5 10-5"}
+  ],
+  highlights: [
+    {n:"100%",l:"团日活动出勤率",d:"参加团支部主题团日活动 4 次，其中 2 次作为小组代表发言，获团支部肯定"},
+    {n:"18+",l:"项AI专业认证",d:"完成阿里云、科大讯飞、Datawhale 及百炼平台全栈 AI 应用开发认证"},
+    {n:"420+",l:"推送最高阅读量",d:"担任支部宣传小组组员，3 个月内制作团务推送 6 篇，较上月均值提升 35%"},
+    {n:"23+",l:"助老服务人次",d:"牵头组织 '青春助老' 活动 1 场，动员团员 7 人参与，获街道团委通报表扬"}
+  ],
+  exp: [
+    {c:"共青团支部",r:"共青团员 / 宣传小组组员",p:"2026年 – 至今",t:"league",pts:["参加团支部主题团日活动 4 次，出勤率 100%，其中 2 次作为小组代表发言，获团支部肯定","牵头组织 '青春助老' 活动 1 场，动员团员 7 人参与，服务老人 23 人次，获街道团委通报表扬","担任支部宣传小组组员，3 个月内制作团务推送 6 篇，单篇最高阅读量 420+，较上月均值提升 35%","积极协助团组织日常事务，参与支部会议记录与材料整理，保障团务工作高效运转"]},
+    {c:"校内社团/学生组织",r:"职务待补充",p:"202X年 – 至今",t:"campus",pts:["【示例】组织 XX 校园活动，参与人数 XXX 人，获得 XX 评价","【示例】负责 XX 技术/宣传工作，推动项目落地并取得阶段性成果","【示例】协调团队成员完成 XX 任务，提升组织效率 XX%"]},
+    {c:"实习实训",r:"实习实训经历（待补充）",p:"202X年 – 至今",t:"intern",pts:["【示例】参与 XX 企业 / 校企合作项目实训，担任 XX 角色，负责 XX 工作","【示例】在实训中完成 XX 任务或作品，获得 XX 评价或成果","【示例】将贸易经济专业知识与 AI 技能应用于真实业务场景，积累实战经验"]}
+  ],
+  proj: [
+    {n:"全栈AI应用开发认证",cat:"ai",tech:["百炼平台","智能体构建","AIGC设计","VISION AI","Spring AI"],d:"完成百炼平台全链路 AI 应用开发认证，涵盖智能体构建、AIGC AI 设计、VISION AI 设计及 Spring AI 应用开发。",r:"获得平台官方认证证书，具备独立构建企业级 AI 应用能力",link:null,icon:"M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", images:["文件夹/3.jpg","文件夹/4.jpg","文件夹/5.jpg","文件夹/6.jpg","文件夹/7.jpg"]},
+    {n:"科大讯飞AI大学堂认证",cat:"ai",tech:["Prompt工程","模型微调","智能体","RAG检索"],d:"系统学习并实践大模型 Prompt 设计、模型微调、智能体开发及 RAG 检索增强生成技术。",r:"通过全部考核，获得科大讯飞 AI 大学堂认证工程师资质",link:null,icon:"M22 12h-4l-3 9L9 3l-3 9H2", images:["文件夹/11.jpg","文件夹/12.jpg","文件夹/13.jpg","文件夹/14.jpg"]},
+    {n:"阿里云人工智能训练师",cat:"ai",tech:["阿里云","AI训练","数据处理","模型评估"],d:"完成阿里云官方人工智能训练师认证，掌握数据标注、模型训练与优化、效果评估等核心技能。",r:"获得阿里云认证人工智能训练师证书，具备商业化 AI 项目落地能力",link:null,icon:"M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z", images:["文件夹/1.jpg","文件夹/2.jpg"]},
+    {n:"Datawhale & 互联网大厂AI证书",cat:"ai",tech:["Datawhale","大厂实战","AI项目","协作学习"],d:"参与 Datawhale 开源学习组织，完成互联网大厂联合出品的 AI 系列课程与实战项目。",r:"获得系列结业证书，积累跨平台 AI 工程化实践经验",link:null,icon:"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z", images:["文件夹/22.jpg","文件夹/23.jpg","文件夹/24.jpg","文件夹/25.jpg","文件夹/21.jpg","文件夹/26.jpg"]},
+    {n:"浪尖儿社区 AI 证书",cat:"platform",tech:["浪尖儿社区","AI证书","个人网站"],d:"加入浪尖儿社区，拿下 AI 证书，并制作个人简历网站持续更新，沉淀成长足迹。",r:"在社区中持续学习与实践，积累 AI 与产品化落地经验",link:null,icon:"M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", images:["文件夹/86.png"]},
+    {n:"校级奖学金 / 竞赛奖项",cat:"platform",tech:["学业成绩","学科竞赛","综合测评"],d:"在校期间表现优异，获得校级奖学金及学科竞赛相关荣誉（具体奖项待补充）。",r:"体现扎实的专业基础与持续的学习能力",link:null,icon:"M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"},
+    {n:"优秀学生干部 / 三好学生",cat:"platform",tech:["综合素质","学生工作","品德修养"],d:"在团务工作与学业发展中表现突出，获得优秀学生干部或三好学生荣誉称号（具体待补充）。",r:"体现全面发展的综合素质与责任担当",link:null,icon:"M4 17l6-6-6-6M12 19h8"}
+  ],
+  hobbies: [
+    { id:"novel", name:"文学小说", sub:"在文字里丈量世界", icon:"book",
+      card:{ bg:"#FFF7E9", bg2:"#FFEDD2", border:"#F0C685", shadow:"#E3B15E", text:"#92600F" },
+      detail:{ text:"这里是「文学小说」小天地 —— 之后会放入我的书单、摘抄与读后感，与文字为伴的时光都值得被收藏。", images:[], video:null } },
+    { id:"manga", name:"漫党", sub:"二次元浓度超标中", icon:"manga",
+      card:{ bg:"#FFECF6", bg2:"#FFDFF0", border:"#F2A6D0", shadow:"#E58FC1", text:"#A2377E" },
+      detail:{ text:"这里是「漫党」的秘密基地 —— 之后会放入我喜欢的漫画、番剧与二次元收藏，欢迎同好交流！", images:[], video:null } }
+  ],
+  portfolio: [
+    { id:"games", num:"01", title:"网页小游戏", sub:"前端交互 · Canvas / 手势识别", icon:"game",
+      tags:["网页游戏","Canvas","手势交互"],
+      desc:"用前端技术打造的轻量小游戏：飞机大战、手势粒子特效、手势切割水果，点开看玩法与演示。",
+      grad:"var(--card-games)",
+      detail:{ blocks:[
+        { type:"text", t:"这里收录了我用原生前端技术（HTML5 Canvas + 手势识别）制作的网页小游戏。点击每个作品查看说明与演示，内容会持续补充。" },
+        { type:"subtitle", t:"✈️ 飞机大战" },
+        { type:"text", t:"经典竖版飞行射击：玩家操控战机移动躲避弹幕并击落敌机，包含道具、连击与分数系统，全部用 Canvas 绘制与碰撞检测实现。" },
+        { type:"subtitle", t:"🖐 手势粒子特效" },
+        { type:"text", t:"通过摄像头捕捉手部关键点，用手势实时驱动屏幕上数百个粒子的运动、颜色与聚散，营造沉浸式互动光影效果。" },
+        { type:"subtitle", t:"🍉 手势切割水果" },
+        { type:"text", t:"融合手势追踪与切水果玩法：挥手即可切开飞舞的水果，配合果汁飞溅与音效，带来体感游戏体验。（演示视频 / 截图待补充）" }
+      ] } },
+    { id:"music", num:"02", title:"AI 音乐作品", sub:"海绵音乐平台 · AI 音乐课程", icon:"music",
+      tags:["AI 音乐","海绵音乐平台","课程实践"],
+      desc:"在张锡峰学长的 AI 音乐课程中学习创作，产出个人音乐作品并发布于海绵音乐平台。",
+      grad:"var(--card-music)",
+      detail:{ blocks:[
+        { type:"text", t:"在张锡峰学长的 AI 音乐课程中学习 AI 音乐创作方法，产出个人音乐作品，并发布于海绵音乐平台。下面两段是课程作品演示视频。" },
+        { type:"video", src:"e.mp4" },
+        { type:"video", src:"c.mp4" }
+      ] } },
+    { id:"wip", placeholder:true }
+  ],
+  journey: [
+    { date:"2026年7月11日", tag:"社区成长", title:"加入浪尖儿社区", desc:"加入浪尖儿社区。拿下 AI 证书。制作个人简历网站并持续更新。", f:3 },
+    { date:"2026年8月15日", tag:"课程作业", title:"把并不完美的作业递了出去", desc:"几千人同课，几百人认真交作业。我既不突出，也不特别，却还是选择把并不完美的作业递了出去。从考试开始，做简历网站那一周，工具受限、教程缺失、AI答非所问，每一步都像在摸黑走路。没有钱换更好的方案，只能在现有条件里反复试错。最后靠 Kimi 和 Workbuddy 把页面优化到“当时能做到的最好”。没有惊艳的结果，但这一路，全是真实的失败过程，也是最好的结果。", f:2 },
+    { date:"2026年8月19日", tag:"课程实践", title:"AI 音乐课程作品产出", desc:"在张锡峰学长的 AI 音乐课程中学习创作，产出作品：海绵音乐平台的音乐。\n我的新歌《Reach for the Night》做好了！一起来听听，感觉如何？🎧 #原创音乐 #海绵音乐 https://www.haimian.com/share/video/GOA9xj4wx7\n《Reach for the Night》诞生了！戴上耳机听听，告诉我你最喜欢哪一段 🎧 #原创音乐 #海绵音乐 https://www.haimian.com/share/video/GOA9xj4wx7 https://www.haimian.com/share/video/WlZvVv3APE", f:0, links:["https://www.haimian.com/share/video/GOA9xj4wx7","https://www.haimian.com/share/video/WlZvVv3APE"] },
+    { date:"2026年8月底", tag:"独自办事", title:"第一次为自己证明", desc:"这不是第一次独自办事，却是一次为自己证明的主动选择。父母已线上授权，我仍犹豫过，准备好材料后还是坐上了那班公交。空荡的大厅、墙上的指引、三楼半开的门——像成长设下的路标。满屋学生与家长中，我安静上前，与工作人员开口、倾听、确认。不到半小时，合同在手，我忽然明白：所谓独立，不是不慌张，而是慌张之后，仍把事情稳稳办完。", f:5 }
+  ],
+  skillMatrix: {
+    aiTech: {t:"AI 核心技术",icon:"M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",items:[{n:"Prompt 工程",l:"expert"},{n:"RAG 检索增强",l:"expert"},{n:"智能体构建",l:"expert"},{n:"模型微调",l:"advanced"},{n:"AIGC 设计",l:"advanced"},{n:"VISION AI",l:"intermediate"}]},
+    devTool: {t:"开发工具与平台",icon:"M10 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10",items:[{n:"百炼平台",l:"expert"},{n:"Spring AI",l:"advanced"},{n:"Python 数据分析",l:"advanced"},{n:"通义灵码",l:"advanced"},{n:"阿里云 AI 平台",l:"intermediate"}]},
+    business: {t:"商业与贸易",icon:"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z",items:[{n:"贸易经济",l:"advanced"},{n:"市场营销",l:"advanced"},{n:"跨境电商",l:"intermediate"},{n:"数字经济",l:"intermediate"},{n:"国际贸易",l:"intermediate"}]},
+    softSkill: {t:"组织与运营",icon:"M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z",items:[{n:"团务组织",l:"expert"},{n:"内容推送运营",l:"advanced"},{n:"活动策划执行",l:"advanced"},{n:"会议记录整理",l:"advanced"},{n:"团队协作",l:"advanced"}]}
+  },
+  edu: [
+    {deg:"贸易经济 · 本科（大一在读）",sch:"江西工程学院",per:"2026年9月 – 至今",det:"系统修读经济学、国际贸易、市场营销、数据分析等核心课程，聚焦数字经济与智能商业交叉领域。自主完成阿里云及科大讯飞多项 AI 专业认证，具备将前沿 AI 技术落地于商业场景的实战能力。计划围绕“AI + 贸易经济”方向开展研究与项目实践，探索大模型在跨境商贸、智能客服等场景的创新应用。"}
+  ]
+};
+
+// ==================== 打字机引擎 ====================
+class Typewriter {
+  constructor(el, words, options = {}) {
+    this.el = el;
+    this.words = words;
+    this.speed = options.speed || 100;
+    this.deleteSpeed = options.deleteSpeed || 50;
+    this.pause = options.pause || 2000;
+    this.index = 0;
+    this.charIndex = 0;
+    this.isDeleting = false;
+    this.loop();
+  }
+  loop() {
+    const current = this.words[this.index];
+    if (this.isDeleting) {
+      this.charIndex--;
+      this.el.textContent = current.substring(0, this.charIndex);
+    } else {
+      this.charIndex++;
+      this.el.textContent = current.substring(0, this.charIndex);
+    }
+    let delay = this.isDeleting ? this.deleteSpeed : this.speed;
+    if (!this.isDeleting && this.charIndex === current.length) {
+      delay = this.pause;
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.charIndex === 0) {
+      this.isDeleting = false;
+      this.index = (this.index + 1) % this.words.length;
+      delay = 500;
+    }
+    requestAnimationFrame(() => setTimeout(() => this.loop(), delay));
+  }
+}
+
+// ==================== Confetti 引擎 ====================
+class ConfettiEngine {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.particles = [];
+    this.isActive = false;
+    this.resize();
+    window.addEventListener('resize', () => this.resize(), { passive: true });
+  }
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+  emit(x, y, count = 60) {
+    const colors = ['#22d3ee', '#34d399', '#f472b6', '#fb923c', '#a78bfa', '#fbbf24', '#60a5fa'];
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+      const velocity = 4 + Math.random() * 6;
+      this.particles.push({
+        x, y,
+        vx: Math.cos(angle) * velocity,
+        vy: Math.sin(angle) * velocity - 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: 3 + Math.random() * 4,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.2,
+        opacity: 1,
+        gravity: 0.15,
+        drag: 0.96
+      });
+    }
+    if (!this.isActive) {
+      this.isActive = true;
+      this.animate();
+    }
+  }
+  animate() {
+    if (this.particles.length === 0) {
+      this.isActive = false;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      return;
+    }
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+      p.vx *= p.drag;
+      p.vy *= p.drag;
+      p.vy += p.gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.rotationSpeed;
+      p.opacity -= 0.008;
+      if (p.opacity <= 0) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+      this.ctx.save();
+      this.ctx.translate(p.x, p.y);
+      this.ctx.rotate(p.rotation);
+      this.ctx.globalAlpha = p.opacity;
+      this.ctx.fillStyle = p.color;
+      this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+      this.ctx.restore();
+    }
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+// ==================== 夜空星空引擎 ====================
+class StarEngine {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.stars = [];
+    this.active = false;
+    this.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.resize();
+    window.addEventListener('resize', () => this.resize(), { passive: true });
+  }
+  resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.w = window.innerWidth;
+    this.h = window.innerHeight;
+    this.canvas.width = this.w * dpr;
+    this.canvas.height = this.h * dpr;
+    this.canvas.style.width = this.w + 'px';
+    this.canvas.style.height = this.h + 'px';
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.buildStars();
+  }
+  buildStars() {
+    const palette = ['#ffffff', '#c7d2fe', '#a5b4fc', '#818cf8', '#60a5fa', '#a78bfa', '#f0abfc', '#fbcfe8', '#bef264', '#fde68a'];
+    const count = Math.round((this.w * this.h) / 9000);
+    this.stars = [];
+    for (let i = 0; i < count; i++) {
+      this.stars.push({
+        x: Math.random() * this.w,
+        y: Math.random() * this.h,
+        r: Math.random() * 1.6 + 0.5,
+        base: Math.random() * 0.5 + 0.45,
+        tw: Math.random() * 1.6 + 0.5,
+        phase: Math.random() * Math.PI * 2,
+        color: palette[Math.floor(Math.random() * palette.length)]
+      });
+    }
+  }
+  draw(time) {
+    const ctx = this.ctx;
+    const g = ctx.createLinearGradient(0, 0, 0, this.h);
+    g.addColorStop(0, '#070b22');
+    g.addColorStop(0.55, '#0c0a2e');
+    g.addColorStop(1, '#160d33');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, this.w, this.h);
+    for (const s of this.stars) {
+      const a = this.reduceMotion ? s.base : s.base * (0.45 + 0.55 * Math.sin(time / 1000 * s.tw + s.phase));
+      ctx.globalAlpha = Math.max(0, a);
+      ctx.fillStyle = s.color;
+      ctx.shadowColor = s.color;
+      ctx.shadowBlur = s.r * 3.2;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+  }
+  animate(time) {
+    if (!this.active) return;
+    this.draw(time || 0);
+    this._raf = requestAnimationFrame((t) => this.animate(t));
+  }
+  setActive(on) {
+    this.active = on;
+    if (on) {
+      this.draw(0);
+      if (!this.reduceMotion) this._raf = requestAnimationFrame((t) => this.animate(t));
+    } else {
+      if (this._raf) cancelAnimationFrame(this._raf);
+      this.ctx.clearRect(0, 0, this.w, this.h);
+    }
+  }
+}
+
+let starEngine = null;
+
+// ==================== 渲染函数 ====================
+function renderHeroTags() {
+  const el = document.getElementById('heroTags');
+  el.innerHTML = DATA.heroTags.map(s => `<span class="tag inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-full text-[0.8125rem] font-medium text-stone-600 dark:text-stone-400 hover:bg-accent/5 dark:hover:bg-accent/10 hover:border-accent/30 dark:hover:border-accent/30 hover:text-accent transition-all hover:-translate-y-0.5 cursor-default">
+    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${s.icon}"></path></svg>
+    ${s.t}
+  </span>`).join('');
+}
+
+function renderHighlights() {
+  const el = document.getElementById('hGrid');
+  el.innerHTML = DATA.highlights.map((h, i) => `
+    <div class="reveal-item reveal-delay-${Math.min(i + 1, 4)} card-hover relative p-8 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl overflow-hidden group">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent to-teal scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+      <div class="text-[2.75rem] font-extrabold leading-none mb-3 bg-gradient-to-r from-accent to-teal bg-clip-text text-transparent font-mono">${h.n}</div>
+      <div class="text-[0.9375rem] font-bold text-stone-900 dark:text-stone-100 mb-2">${h.l}</div>
+      <div class="text-[0.8125rem] text-stone-400 dark:text-stone-500 leading-relaxed">${h.d}</div>
+    </div>
+  `).join('');
+}
+
+function renderExp() {
+  const panels = document.getElementById('expPanels');
+  const typeLabels = { league:'团组织', campus:'校内职务', intern:'实习实训' };
+  const types = ['league', 'campus', 'intern'];
+  types.forEach(type => {
+    const items = DATA.exp.filter(e => e.t === type);
+    const div = document.createElement('div');
+    div.className = 'tab-panel' + (type === 'league' ? ' block' : ' hidden');
+    div.dataset.panel = type;
+    div.innerHTML = `<div class="relative pl-8 before:absolute before:left-[6px] before:top-2 before:bottom-2 before:w-0.5 before:bg-gradient-to-b before:from-accent before:to-teal before:rounded-full before:opacity-30">
+      ${items.map((e, i) => `
+      <div class="reveal-item relative pb-12 last:pb-0" style="transition-delay: ${i * 0.1}s">
+        <div class="absolute -left-8 top-1.5 w-3.5 h-3.5 bg-white dark:bg-stone-900 border-[3px] border-accent rounded-full transition-transform duration-300 group-hover:scale-125 shadow-sm"></div>
+        <div class="card-hover bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl p-8 transition-all hover:shadow-card dark:hover:shadow-card-dark hover:border-stone-300 dark:hover:border-stone-600 hover:translate-x-1">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
+            <div>
+              <div class="text-lg font-extrabold text-stone-900 dark:text-stone-100">${e.r}</div>
+              <div class="text-[0.9375rem] text-accent font-bold mt-1">${e.c}</div>
+            </div>
+            <div class="sm:text-right">
+              <span class="font-mono text-[0.8125rem] text-stone-400 dark:text-stone-500 bg-stone-100 dark:bg-stone-900 px-3 py-1 rounded-full inline-block">${e.p}</span>
+              <div class="text-xs text-stone-400 dark:text-stone-500 mt-1 uppercase tracking-wider">${typeLabels[type]}</div>
+            </div>
+          </div>
+          <ul class="space-y-2.5">
+            ${e.pts.map(p => `<li class="relative pl-5 text-[0.9375rem] text-stone-600 dark:text-stone-400 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-accent before:font-bold">${p}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+      `).join('')}
+    </div>`;
+    panels.appendChild(div);
+  });
+}
+
+function renderProjects(filter = 'all') {
+  const el = document.getElementById('projGrid');
+  const items = filter === 'all' ? DATA.proj : DATA.proj.filter(p => p.cat === filter);
+  el.innerHTML = items.map((p, i) => {
+    const imgs = (p.images && p.images.length) ? p.images : null;
+    const imgsArg = imgs ? '[' + imgs.map(s => "'" + s + "'").join(',') + ']' : '[]';
+    const head = imgs
+      ? `<div class="relative h-44 overflow-hidden bg-stone-100 dark:bg-stone-800 cursor-pointer group/img" onclick="openImgViewer(${imgsArg})">
+           <img src="${imgs[0]}" alt="${p.n} 证书" loading="lazy" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105" onerror="this.style.display='none'"/>
+           <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent pointer-events-none"></div>
+           <span class="absolute top-3 right-3 text-[0.6875rem] font-mono font-bold px-2.5 py-1 rounded-full bg-stone-900/75 text-white">1 / ${imgs.length}</span>
+           <span class="absolute bottom-3 left-3 text-xs font-semibold text-white/95 flex items-center gap-1.5 drop-shadow">
+             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+             查看全部 (${imgs.length})
+           </span>
+         </div>`
+      : `<div class="h-40 bg-gradient-to-br from-stone-200 to-stone-100 dark:from-stone-700 dark:to-stone-800 relative flex items-center justify-center overflow-hidden">
+           <div class="absolute inset-0 bg-gradient-to-br from-accent/0 to-teal/0 group-hover:from-accent/5 group-hover:to-teal/5 transition-all duration-300"></div>
+           <div class="w-16 h-16 bg-white dark:bg-stone-800 rounded-xl flex items-center justify-center shadow-card relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">
+             <svg class="w-8 h-8 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${p.icon}"></path></svg>
+           </div>
+         </div>`;
+    const foot = imgs
+      ? `<div class="flex items-center justify-between gap-3 mt-4">
+           <span class="text-xs font-semibold text-accent px-3 py-1.5 rounded-lg bg-accent/5 dark:bg-accent/10 border-l-[3px] border-accent truncate">${p.r}</span>
+           <button type="button" onclick="openImgViewer(${imgsArg})" class="shrink-0 text-xs font-semibold text-white px-4 py-2 rounded-lg bg-gradient-to-r from-accent to-teal hover:opacity-90 hover:-translate-y-0.5 transition-all">查看证书 ▸</button>
+         </div>
+         <div class="text-xs text-stone-400 dark:text-stone-500 mt-3">📷 共 ${imgs.length} 张证书 · 点击图片逐张查看</div>`
+      : `<div class="text-xs font-semibold text-accent mb-4 p-3 bg-accent/5 dark:bg-accent/10 rounded-lg border-l-[3px] border-accent">${p.r}</div>`;
+    return `<div class="reveal-item reveal-delay-${Math.min(i + 1, 4)} card-hover relative bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl overflow-hidden flex flex-col group">
+      ${head}
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-start justify-between gap-2 mb-2">
+          <h3 class="text-lg font-extrabold text-stone-900 dark:text-stone-100">${p.n}</h3>
+        </div>
+        <p class="text-sm text-stone-500 dark:text-stone-400 leading-relaxed mb-4 flex-1">${p.d}</p>
+        ${foot}
+        <div class="flex flex-wrap gap-2 mt-3">
+          ${p.tech.map(t => `<span class="font-mono text-[0.6875rem] px-2.5 py-1 bg-stone-100 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 rounded text-stone-500 dark:text-stone-400 group-hover:bg-accent/5 group-hover:border-accent/30 group-hover:text-accent transition-all">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  observeReveal();
+}
+
+function renderSkills() {
+  const el = document.getElementById('skillGrid');
+  el.innerHTML = Object.values(DATA.skillMatrix).map((cat, i) => `
+    <div class="reveal-item reveal-delay-${Math.min(i + 1, 4)} card-hover bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl p-8">
+      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-stone-200 dark:border-stone-700">
+        <div class="w-10 h-10 rounded-lg bg-accent/5 dark:bg-accent/10 flex items-center justify-center text-accent">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${cat.icon}"></path></svg>
+        </div>
+        <div class="text-base font-extrabold text-stone-900 dark:text-stone-100">${cat.t}</div>
+      </div>
+      <div class="flex flex-wrap gap-2.5">
+        ${cat.items.map(item => {
+          const isExpert = item.l === 'expert';
+          return `<span class="px-4 py-2 bg-stone-100 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 rounded-lg text-sm ${isExpert ? 'bg-gradient-to-r from-accent/5 to-transparent border-accent/50 text-accent font-bold' : 'text-stone-600 dark:text-stone-400'} hover:bg-accent/5 dark:hover:bg-accent/10 hover:border-accent/30 hover:text-accent transition-all hover:-translate-y-0.5 cursor-default shadow-sm hover:shadow-card">${item.n}</span>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderEdu() {
+  document.getElementById('eduGrid').innerHTML = DATA.edu.map((e, i) => `
+    <div class="reveal-item reveal-delay-${Math.min(i + 1, 4)} card-hover relative bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl p-8 overflow-hidden group">
+      <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-teal opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <div class="text-lg font-extrabold text-stone-900 dark:text-stone-100 mb-1">${e.deg}</div>
+      <div class="text-[0.9375rem] text-stone-500 dark:text-stone-400 mb-2">${e.sch}</div>
+      <div class="font-mono text-[0.8125rem] text-stone-400 dark:text-stone-500 mb-3">${e.per}</div>
+      <div class="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">${e.det}</div>
+    </div>
+  `).join('');
+}
+
+// ==================== 卡通风格 SVG 图标 ====================
+function bookIcon(cls = 'w-24 h-24') {
+  return `<svg viewBox="0 0 96 96" class="${cls}" aria-hidden="true">
+    <path d="M22 10l2.1 5 5 2.1-5 2.1-2.1 5-2.1-5-5-2.1 5-2.1z" fill="#FBBF24"/>
+    <path d="M76 6l1.7 4 4 1.7-4 1.7-1.7 4-1.7-4-4-1.7 4-1.7z" fill="#FCD34D"/>
+    <path d="M48 30C41 22.5 26.5 19.5 15 21.5V74c11.5-2 26 1 33 9 7-8 21.5-11 33-9V21.5C69.5 19.5 55 22.5 48 30z" fill="#FFFDF5" stroke="#E8A23D" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M48 30v53" stroke="#E8A23D" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M22 34c7-1.5 14 .5 20 3M22 44c7-1.5 14 .5 20 3M54 37c6-2.5 13-4.5 20-3M54 47c6-2.5 13-4.5 20-3" stroke="#F1DCB4" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="34" cy="57" r="3" fill="#4E342E"/><circle cx="62" cy="57" r="3" fill="#4E342E"/>
+    <path d="M42 62q6 6 12 0" stroke="#4E342E" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <ellipse cx="27" cy="61" rx="4" ry="2.6" fill="#FBB6C1" opacity=".85"/><ellipse cx="69" cy="61" rx="4" ry="2.6" fill="#FBB6C1" opacity=".85"/>
+    <path d="M60 20.5v14l4.5-4 4.5 4v-14z" fill="#FB7185"/>
+  </svg>`;
+}
+
+function mangaIcon(cls = 'w-24 h-24') {
+  return `<svg viewBox="0 0 96 96" class="${cls}" aria-hidden="true">
+    <rect x="20" y="18" width="58" height="58" rx="12" fill="#FF9FC6" transform="rotate(7 49 47)"/>
+    <rect x="14" y="14" width="58" height="58" rx="12" fill="#FFF7FB" stroke="#E75FA0" stroke-width="3.5"/>
+    <path d="M24 28l8 5M22 38l9 3M24 48l8 2" stroke="#FFC1DD" stroke-width="3" stroke-linecap="round"/>
+    <path d="M60 22l3 6.5 7 1-5 5 1.2 7-6.2-3.3-6.2 3.3 1.2-7-5-5 7-1z" fill="#FBBF24" stroke="#F59E0B" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="38" cy="50" r="3" fill="#4A2B3F"/><circle cx="52" cy="50" r="3" fill="#4A2B3F"/>
+    <path d="M40 57q5 5.5 10 0" stroke="#4A2B3F" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <ellipse cx="32" cy="55" rx="3.6" ry="2.3" fill="#F9A8C9" opacity=".9"/><ellipse cx="58" cy="55" rx="3.6" ry="2.3" fill="#F9A8C9" opacity=".9"/>
+    <circle cx="65" cy="65" r="7.5" fill="#fff" stroke="#E75FA0" stroke-width="2.5"/>
+    <path d="M60 61l-5-3 2 6z" fill="#fff" stroke="#E75FA0" stroke-width="2" stroke-linejoin="round"/>
+    <text x="65" y="69" text-anchor="middle" font-size="11" font-weight="900" fill="#E75FA0" font-family="Arial, sans-serif">!</text>
+  </svg>`;
+}
+
+function musicIcon(cls = 'w-24 h-24') {
+  return `<svg viewBox="0 0 96 96" class="${cls}" aria-hidden="true">
+    <circle cx="48" cy="48" r="34" fill="#EC4899"/>
+    <circle cx="48" cy="48" r="34" fill="none" stroke="#F59E0B" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"/>
+    <path d="M40 58V29l24-6v29" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="34" cy="60" r="8.5" fill="#fff"/>
+    <circle cx="58" cy="54" r="8.5" fill="#fff"/>
+  </svg>`;
+}
+
+function gameIcon(cls = 'w-24 h-24') {
+  return `<svg viewBox="0 0 96 96" class="${cls}" aria-hidden="true">
+    <rect x="13" y="33" width="70" height="42" rx="15" fill="#6366F1"/>
+    <rect x="13" y="33" width="70" height="42" rx="15" fill="none" stroke="#312E81" stroke-width="3"/>
+    <circle cx="35" cy="52" r="5.2" fill="#fff"/>
+    <circle cx="48" cy="52" r="5.2" fill="#fff"/>
+    <path d="M41.5 45.5v13M35 52h13" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/>
+    <circle cx="67" cy="47" r="3.4" fill="#FBBF24"/>
+    <circle cx="76" cy="56" r="3.4" fill="#34D399"/>
+    <circle cx="64" cy="61" r="3.4" fill="#F472B6"/>
+  </svg>`;
+}
+
+function iconByName(name, cls) {
+  if (name === 'manga') return mangaIcon(cls);
+  if (name === 'music') return musicIcon(cls);
+  if (name === 'game') return gameIcon(cls);
+  return bookIcon(cls);
+}
+
+// ==================== 二次元风格花朵（履历轴 · 每朵颜色与花型均独特） ====================
+const ANIME_FLOWERS = [
+  { petal:['#FB7EB8','#F472B6'], center:'#FFE7A8', dot:'#BE185D', t:'#DB2777' },
+  { petal:['#A78BFA','#8B5CF6'], center:'#FDE68A', dot:'#6D28D9', t:'#7C3AED' },
+  { petal:['#FB923C','#F97316'], center:'#FFF1C9', dot:'#C2410C', t:'#EA580C' },
+  { petal:['#5EA8FF','#3B82F6'], center:'#E0F2FE', dot:'#1D4ED8', t:'#2563EB' },
+  { petal:['#FB7185','#EF4444'], center:'#FFE4E6', dot:'#9F1239', t:'#E11D48' },
+  { petal:['#34D399','#10B981'], center:'#ECFDF5', dot:'#047857', t:'#059669' },
+  { petal:['#F0ABFC','#E879F9'], center:'#FAE8FF', dot:'#A21CAF', t:'#C026D3' },
+  { petal:['#FDE047','#FACC15'], center:'#FFFBEA', dot:'#A16207', t:'#CA8A04' }
+];
+const FLOWER_CFG = [
+  {n:5, rx:6.2, ry:9.5},   // 0 玫瑰(5瓣)
+  {n:6, rx:5.5, ry:10},    // 1 百合(6瓣尖)
+  {n:0},                   // 2 郁金香(特殊)
+  {n:12, rx:2.6, ry:8.5},  // 3 雏菊(细多瓣)
+  {n:4, rx:7, ry:8.5},     // 4 四瓣花
+  {n:8, rx:5, ry:8},       // 5 八瓣菊
+  {n:5, rx:5.5, ry:9},     // 6 樱系(5瓣)
+  {n:15, rx:3.4, ry:7}     // 7 向日葵(多瓣)
+];
+let _flowerUID = 0;
+function animeFlowerSVG(i, cls) {
+  cls = cls || 'w-12 h-12';
+  const f = ANIME_FLOWERS[i % ANIME_FLOWERS.length];
+  const cfg = FLOWER_CFG[i % FLOWER_CFG.length];
+  const uid = 'fl' + (_flowerUID++);
+  let petals = '';
+  if (cfg.n === 0) {
+    petals = `<path d="M24 7 C16 10 13 22 19 30 C21 26 27 26 29 30 C35 22 32 10 24 7 Z" fill="url(#${uid}g)"/>
+      <path d="M24 12 C20 14 18 24 23 30 C24 26 24 26 24 30 C29 24 28 14 24 12 Z" fill="${f.center}" opacity=".6"/>`;
+  } else {
+    const step = 360 / cfg.n;
+    for (let a = 0; a < 360; a += step) {
+      petals += `<ellipse cx="24" cy="11" rx="${cfg.rx}" ry="${cfg.ry}" fill="url(#${uid}g)" transform="rotate(${a.toFixed(1)} 24 24)"/>`;
+    }
+  }
+  const sepal = `<path class="sepal" d="M24 5 C15 10 13 23 20 31 C23 27 25 27 28 31 C35 23 33 10 24 5 Z" fill="#74B54A" stroke="#4C9F38" stroke-width="1.2"/>`;
+  return `<svg viewBox="0 0 48 48" class="${cls} flower-mark drop-shadow-md" aria-hidden="true">
+    <defs><linearGradient id="${uid}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${f.petal[0]}"/><stop offset="1" stop-color="${f.petal[1]}"/></linearGradient></defs>
+    <g class="sepal">${sepal}</g>
+    <g class="petal-group">
+    ${petals}
+    <circle cx="24" cy="24" r="${cfg.n >= 12 ? 9 : 8}" fill="${f.center}" stroke="${f.dot}" stroke-width="1.4"/>
+    <circle cx="21" cy="22.5" r="1.5" fill="${f.dot}"/><circle cx="27" cy="22.5" r="1.5" fill="${f.dot}"/>
+    <path d="M21.5 26 q2.5 2.4 5 0" stroke="${f.dot}" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="19" cy="24.5" rx="2.4" ry="1.5" fill="#fff" opacity=".5"/><ellipse cx="29" cy="24.5" rx="2.4" ry="1.5" fill="#fff" opacity=".5"/>
+    </g>
+    <g fill="#fff" opacity=".9"><path d="M40 9 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1z"/><path d="M8 37 l.7 2 2 .7 -2 .7 -.7 2 -.7 -2 -2 -.7 2 -.7z"/><path d="M42 30 l.6 1.8 1.8.6 -1.8.6 -.6 1.8 -.6 -1.8 -1.8 -.6 1.8 -.6z" opacity=".7"/></g>
+  </svg>`;
+}
+function ghostFlowerSVG() {
+  let petals = '';
+  for (let a = 0; a < 360; a += 72) {
+    petals += `<ellipse cx="24" cy="11" rx="6.2" ry="9.5" fill="none" stroke="#9BB89A" stroke-width="1.6" stroke-dasharray="3 2.4" transform="rotate(${a} 24 24)"/>`;
+  }
+  return `<svg viewBox="0 0 48 48" class="w-12 h-12 opacity-50" aria-hidden="true">${petals}<circle cx="24" cy="24" r="7" fill="none" stroke="#9BB89A" stroke-width="1.6" stroke-dasharray="3 2.4"/></svg>`;
+}
+function flowerAccent(i) {
+  const f = ANIME_FLOWERS[i % ANIME_FLOWERS.length];
+  return { p: f.petal[1], t: f.t };
+}
+
+// ==================== 树枝绘制（履历轴 · 粗壮树皮纹理 + 缠绕细枝 + 叶蔓） ====================
+let _branchUID = 0;
+function sinePath(w, midY, amp, wl, phase, step) {
+  step = step || 6;
+  let d = '';
+  for (let x = 0; x <= w; x += step) {
+    const y = midY + amp * Math.sin((x / wl) * Math.PI * 2 + phase);
+    d += (x === 0 ? `M ${x} ${y.toFixed(1)}` : ` L ${x.toFixed(1)} ${y.toFixed(1)}`);
+  }
+  return d;
+}
+function leafCluster(x, y, angle, scale) {
+  scale = scale || 1;
+  return `<g transform="translate(${x} ${y}) rotate(${angle}) scale(${scale})">
+    <path d="M0 0 C 8 -6 18 -4 22 4 C 14 8 4 8 0 0 Z" fill="#5FA844" stroke="#3f7d2e" stroke-width="1"/>
+    <path d="M2 2 C 9 1 15 2 20 4" stroke="#3f7d2e" stroke-width="1" fill="none" opacity=".7"/>
+  </g>`;
+}
+// 放大版树叶（比 leafCluster 明显更大），用于藤蔓上点缀性的大叶
+function leafBig(x, y, angle) {
+  return `<g transform="translate(${x} ${y}) rotate(${angle}) scale(1.9)">
+    <path d="M0 0 C 9 -8 21 -5 26 5 C 17 10 5 10 0 0 Z" fill="#4C9F38" stroke="#2f6d20" stroke-width="1.1"/>
+    <path d="M3 3 C 11 1 18 3 24 5" stroke="#2f6d20" stroke-width="1.1" fill="none" opacity=".75"/>
+    <path d="M0 0 Q 13 8 25 4" stroke="#2f6d20" stroke-width=".8" fill="none" opacity=".5"/>
+  </g>`;
+}
+function branchSVG(w, dir, isLast, endSide) {
+  dir = dir || 1;                                 // 1=左→右，-1=右→左（蛇形反向延伸）
+  const midY = 26, wl = w / 2.0, A = 13;         // A 加深：弯曲程度更高、起伏更明显
+  const main  = sinePath(w, midY, A, wl, 0);
+  const sh    = sinePath(w, midY + 5, A, wl, 0);
+  const hi    = sinePath(w, midY - 3, A, wl, 0);
+  // 缠绕绿蔓（双层相位错开，包裹主干，弯曲更深）
+  const twig1 = sinePath(w, midY, 15, wl, Math.PI);
+  const twig2 = sinePath(w, midY, 11, wl, Math.PI / 2);
+  const twig4 = sinePath(w, midY, 13, wl * 0.9, Math.PI * 1.3);
+  const twig3 = sinePath(w, midY, 9, wl * 1.3, Math.PI * 0.7);
+  const wrapA = sinePath(w, midY, A * 1.4, wl * 0.72, Math.PI * 0.6);   // 大缠绕绿蔓（越过主干）
+  const wrapB = sinePath(w, midY, A * 1.1, wl * 1.18, Math.PI * 1.15);  // 缠绕绿蔓（相位错开）
+  let cracks = '';
+  for (let x = 24; x < w - 24; x += 40) {
+    const y = midY + A * Math.sin((x / wl) * Math.PI * 2);
+    cracks += `<path d="M ${x} ${(y - 4).toFixed(1)} q 3 3 7 1" stroke="#5b3a1e" stroke-width="1.4" fill="none" opacity=".5"/>`;
+  }
+  // 树叶：错落有致（大小/高低/左右交替）
+  let leaves = '';
+  let k = 0;
+  for (let x = 28; x < w - 16; x += 33) {
+    const y = midY + A * Math.sin((x / wl) * Math.PI * 2);
+    const side = (k % 2 === 0) ? 1 : -1;
+    const scale = 0.95 + ((k * 37) % 6) * 0.11;          // 0.95~1.55 大小错落
+    const dy = side * (9 + ((k * 53) % 14));              // 高低错落
+    leaves += `<path d="M ${x} ${y.toFixed(1)} q ${side * 13} ${dy - 7} ${side * 29} ${dy} q ${side * 11} ${dy + 9} 1 ${dy + 17}" stroke="#4C9F38" stroke-width="2.8" fill="none" stroke-linecap="round" opacity=".9"/>`;
+    leaves += leafBig(Math.round(x + side * 23), Math.round(y + dy * 0.55), side > 0 ? -28 + (k % 3) * 14 : 208 - (k % 3) * 14, scale);
+    if (k % 3 === 1) leaves += leafCluster(x - side * 15, y - 5, side > 0 ? 200 : -20, 0.8 + ((k * 7) % 3) * 0.12);
+    k++;
+  }
+  // 缠绕绿蔓上的点缀叶
+  let wrapLeaves = '';
+  for (let x = 50; x < w - 30; x += 71) {
+    const y = midY + A * 1.4 * Math.sin((x / (wl * 0.72)) * Math.PI * 2 + Math.PI * 0.6);
+    const side = (Math.round(x / 71) % 2 === 0) ? 1 : -1;
+    wrapLeaves += leafCluster(Math.round(x + side * 12), Math.round(y - 4), side > 0 ? -25 : 205, 0.85);
+  }
+  let tendrils = '';
+  for (let x = 60; x < w - 40; x += 96) {
+    const y = midY + A * Math.sin((x / wl) * Math.PI * 2) + 6;
+    const dir = (Math.round(x / 96) % 2 === 0) ? 1 : -1;
+    tendrils += `<path d="M ${x} ${y.toFixed(1)} c ${dir * 8} 4 ${dir * 12} 10 ${dir * 6} 13 c -4 2 -8 -2 -5 -6" stroke="#4C9F38" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".8"/>`;
+  }
+  let end = '';
+  if (isLast) {
+    const ex = endSide === 'left' ? 6 : w - 6;
+    const dir = endSide === 'left' ? -1 : 1;
+    end = `<path d="M ${ex} ${midY} q ${dir * 7} -18 ${dir * 2} -30 q ${-dir * 9} 7 ${-dir * 5} 16" stroke="#7a4a22" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M ${(ex + dir * 2).toFixed(1)} ${(midY - 25).toFixed(1)} q ${dir * 6} -7 ${dir * 2} -14" stroke="#4C9F38" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  }
+  const buid = 'bk' + (_branchUID++);
+  const inner = `
+    <path d="${twig1}" stroke="#6b4423" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/>
+    <path d="${twig2}" stroke="#8a5a2e" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="${twig4}" stroke="#3f7d2e" stroke-width="3.4" fill="none" stroke-linecap="round" opacity=".75"/>
+    <path d="${sh}" stroke="#3f2814" stroke-width="17" fill="none" stroke-linecap="round" opacity=".55"/>
+    <path d="${main}" stroke="url(#${buid}g)" stroke-width="15" fill="none" stroke-linecap="round"/>
+    <path d="${hi}" stroke="#c08a52" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/>
+    <path d="${wrapA}" stroke="#3f8f2e" stroke-width="4.4" fill="none" stroke-linecap="round" opacity=".82"/>
+    <path d="${wrapB}" stroke="#5bbf43" stroke-width="3" fill="none" stroke-linecap="round" opacity=".72"/>
+    <path d="${twig3}" stroke="#4C9F38" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+    ${cracks}
+    ${leaves}
+    ${wrapLeaves}
+    ${tendrils}
+    ${end}
+  `;
+  const body = dir === -1 ? `<g transform="translate(${w},0) scale(-1,1)">${inner}</g>` : inner;
+  return `<svg width="${w}" height="52" viewBox="0 0 ${w} 52" class="absolute left-0 top-0 pointer-events-none" style="overflow:visible" aria-hidden="true">
+    <defs><linearGradient id="${buid}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c6b3f"/><stop offset=".5" stop-color="#7a4a22"/><stop offset="1" stop-color="#5b3a1e"/></linearGradient></defs>
+    ${body}
+  </svg>`;
+}
+
+// ==================== 履历轴 · 行间蛇形回转弯蔓（同侧自然下垂+鼓出，连通上下两行树枝） ====================
+let _turnUID = 0;
+function turnSVG(h, side) {
+  const s = side === 'right' ? -1 : 1;          // 蛇形鼓出方向：right 向行内(左)鼓，left 向行内(右)鼓
+  const uid = 'tn' + (_turnUID++);
+  const h0 = 1, h1 = h - 1;
+  // 主藤：顶部(x=0)接上一行树枝末端，底部(x=0)接下一行树枝起点；三段弧加深蛇形鼓出，弯曲不中断
+  const d = `M 0 ${h0} C ${s*52} ${(h*0.05).toFixed(1)} ${s*88} ${(h*0.18).toFixed(1)} ${s*52} ${(h*0.36).toFixed(1)} C ${s*26} ${(h*0.52).toFixed(1)} ${s*2} ${(h*0.46).toFixed(1)} ${s*34} ${(h*0.64).toFixed(1)} C ${s*66} ${(h*0.82).toFixed(1)} ${s*26} ${(h*0.92).toFixed(1)} 0 ${h1}`;
+  // 缠绕绿蔓（伴行偏移，包裹主藤）
+  const vine = `M 0 ${h0} C ${s*44} ${(h*0.06).toFixed(1)} ${s*72} ${(h*0.20).toFixed(1)} ${s*42} ${(h*0.40).toFixed(1)} C ${s*20} ${(h*0.56).toFixed(1)} ${s*0} ${(h*0.50).toFixed(1)} ${s*26} ${(h*0.68).toFixed(1)} C ${s*56} ${(h*0.84).toFixed(1)} ${s*20} ${(h*0.93).toFixed(1)} 0 ${h1}`;
+  const tendril = `M ${s*34} ${(h*0.64).toFixed(1)} c ${s*14} 2 ${s*18} 10 ${s*9} 15 c -6 3 -14 -1 -10 -8`;
+  // 树叶：三片错落的大叶（大小/高低/角度均不同）
+  const lx = s * 58, ly = h * 0.30;
+  const lx2 = s * 42, ly2 = h * 0.58;
+  const lx3 = s * 30, ly3 = h * 0.82;
+  return `<svg width="90" height="${h}" viewBox="0 0 90 ${h}" style="overflow:visible" aria-hidden="true">
+    <defs><linearGradient id="${uid}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c6b3f"/><stop offset=".5" stop-color="#7a4a22"/><stop offset="1" stop-color="#5b3a1e"/></linearGradient></defs>
+    <path d="${d}" stroke="#3f2814" stroke-width="14" fill="none" stroke-linecap="round" opacity=".5"/>
+    <path d="${d}" stroke="url(#${uid}g)" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="${d}" stroke="#c08a52" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+    <path d="${vine}" stroke="#4C9F38" stroke-width="3.8" fill="none" stroke-linecap="round" opacity=".9"/>
+    <path d="${tendril}" stroke="#4C9F38" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    ${leafBig(Math.round(lx), Math.round(ly), s > 0 ? 22 : 202, 1.55)}
+    ${leafBig(Math.round(lx2), Math.round(ly2), s > 0 ? 150 : -30, 1.3)}
+    ${leafBig(Math.round(lx3), Math.round(ly3), s > 0 ? -12 : 192, 1.1)}
+  </svg>`;
+}
+
+// ==================== 渲染：兴趣爱好 ====================
+function renderHobbies() {
+  const el = document.getElementById('hobbyGrid');
+  el.innerHTML = DATA.hobbies.map((h, i) => `
+    <div class="reveal-item reveal-delay-${Math.min(i + 1, 4)}">
+      <a href="#/page/${h.id}" class="hobby-card group flex flex-col items-center gap-5 p-8 rounded-[28px] border-[3px] h-full" style="background:linear-gradient(160deg, ${h.card.bg} 0%, ${h.card.bg2} 100%); border-color:${h.card.border}; box-shadow:0 7px 0 ${h.card.shadow};" aria-label="查看${h.name}详情">
+        <span class="hobby-icon">${iconByName(h.icon, 'w-24 h-24')}</span>
+        <span class="flex flex-col items-center">
+          <span class="text-lg font-extrabold" style="color:${h.card.text}">${h.name}</span>
+          <span class="text-xs font-medium mt-1 opacity-70" style="color:${h.card.text}">${h.sub}</span>
+        </span>
+        <span class="px-3.5 py-1.5 rounded-full bg-white/75 text-[0.6875rem] font-bold tracking-wide" style="color:${h.card.text}">点击进入 →</span>
+      </a>
+    </div>
+  `).join('');
+}
+
+// ==================== 渲染：作品集 ====================
+function renderPortfolio() {
+  const el = document.getElementById('portfolioGrid');
+  el.innerHTML = DATA.portfolio.map((p, i) => {
+    if (p.placeholder) return `
+      <div class="reveal-item reveal-delay-${Math.min(i + 1, 4)}">
+        <div class="relative rounded-2xl border-2 border-dashed border-stone-300 dark:border-stone-700 p-8 md:p-10 flex flex-col items-center justify-center text-center min-h-[260px] h-full -rotate-1 hover:rotate-0 hover:border-accent/50 transition-transform duration-300">
+          <span class="w-14 h-14 rounded-full flex items-center justify-center text-white text-3xl font-black leading-none shadow-lg" style="background:linear-gradient(135deg,#F59E0B,#EC4899)">+</span>
+          <span class="mt-5 text-lg font-extrabold text-stone-700 dark:text-stone-200">下一个作品正在路上</span>
+          <span class="mt-1 text-sm text-stone-400 dark:text-stone-500">这里将放入新作品 · 敬请期待</span>
+        </div>
+      </div>`;
+    return `
+      <div class="reveal-item reveal-delay-${Math.min(i + 1, 4)}">
+        <a href="#/page/${p.id}" class="port-card group relative block p-8 md:p-10 overflow-hidden h-full min-h-[260px]" style="background:${p.grad}" aria-label="查看${p.title}详情">
+          <span class="absolute inset-0 opacity-[0.10] pointer-events-none" style="background-image:repeating-linear-gradient(-45deg,#fff 0 10px,transparent 10px 26px)"></span>
+          <span class="absolute -right-3 -top-8 font-mono font-black leading-none text-white/15 text-[7.5rem] rotate-12 select-none pointer-events-none group-hover:rotate-3 group-hover:scale-110 transition-transform duration-500">${p.num}</span>
+          <span class="relative flex flex-wrap gap-2 mb-5">
+            ${p.tags.map(t => `<span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur border border-white/30 text-white text-xs font-bold">${t}</span>`).join('')}
+          </span>
+          <h3 class="relative text-2xl md:text-[1.7rem] font-black text-white tracking-tight">${p.title}</h3>
+          <p class="relative text-sm md:text-base text-white/85 mt-2 leading-relaxed max-w-[420px]">${p.desc}</p>
+          <span class="relative flex items-end gap-[5px] h-9 mt-6" aria-hidden="true">
+            ${[45,70,100,60,85,50,75].map((ht, b) => `<span class="eq-bar w-[6px] rounded-full bg-white/90" style="height:${ht}%; animation-delay:${(b * 0.12).toFixed(2)}s"></span>`).join('')}
+          </span>
+          <span class="relative inline-flex items-center gap-2 mt-6 text-sm font-bold text-white/90 group-hover:text-white">
+            查看详情
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </div>`;
+  }).join('');
+}
+
+// ==================== 渲染：履历轴（树枝时间线 · 蛇形自然蔓延 · 花苞点击盛开） ====================
+function renderJourney() {
+  const wrap = document.getElementById('journeyWrap');
+  if (!wrap) return;
+  const isMobile = window.innerWidth < 640;
+  const colW = isMobile ? 220 : 300;
+  const gap = 24;
+  const turnH = 88;
+  const stageW = Math.max(320, wrap.clientWidth || (isMobile ? 320 : 1080));
+  // 每行最多 3 张，确保第 4 张卡片落在第二行
+  const perRow = Math.max(1, Math.min(3, Math.floor((stageW + gap) / (colW + gap))));
+  // 续卷作为蛇形末端的“花苞节点”，与真实卡片一同在行间自然蔓延（挂在最后一张卡片之后）
+  const items = DATA.journey.slice();
+  items.push({ ghost: true });
+  const rows = [];
+  for (let i = 0; i < items.length; i += perRow) rows.push(items.slice(i, i + perRow));
+  const rowCount = rows.length;
+
+  const nodeHTML = (e, ci) => {
+    // 续卷花苞：仅展示待放的花与“续卷…”字样，不展开
+    if (e.ghost) {
+      return `
+      <div class="jnode flex flex-col items-center shrink-0 relative z-10" style="width:${colW}px">
+        <div class="h-[52px] flex items-center justify-center">${ghostFlowerSVG()}</div>
+        <div class="w-full min-w-0 mt-3 text-center"><div class="text-xs text-stone-400 dark:text-stone-500 whitespace-nowrap font-medium">续卷…</div></div>
+      </div>`;
+    }
+    const fa = flowerAccent(e.f);
+    const linksHTML = (e.links && e.links.length)
+      ? `<div class="flex flex-wrap gap-2 mt-4">${e.links.map(l => `<a href="${l}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-accent/10 dark:bg-accent/15 border border-accent/30 text-accent text-xs font-bold hover:bg-accent hover:text-white dark:hover:bg-accent transition-all"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>观看视频</a>`).join('')}</div>`
+      : '';
+    return `
+      <div class="jnode flex flex-col items-center shrink-0 relative z-10" style="width:${colW}px" onclick="this.classList.toggle('open')">
+        <div class="h-[52px] flex items-center justify-center">${animeFlowerSVG(e.f, 'w-12 h-12')}</div>
+        <div class="jcard reveal-item w-full min-w-0 mt-3 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl p-5" style="transition-delay:${(ci % perRow) * 0.05}s">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-mono text-xs font-bold px-3 py-1 rounded-full" style="background:${fa.p}22; color:${fa.t}">${e.date}</span>
+            <span class="text-xs font-medium px-3 py-1 rounded-full bg-stone-100 dark:bg-stone-700 text-stone-500 dark:text-stone-400">${e.tag}</span>
+          </div>
+          <div class="jhint text-xs text-stone-400 dark:text-stone-500 mt-2.5 flex items-center gap-1 select-none">轻触花苞，看它盛开 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          <div class="journey-full">
+            <div class="text-base font-extrabold text-stone-900 dark:text-stone-100 mb-2 break-words" style="overflow-wrap:anywhere;word-break:break-word;">${e.title}</div>
+            ${(e.desc||'').split('\n').map(l => l.trim() ? `<p class="text-sm text-stone-500 dark:text-stone-400 leading-relaxed mb-2 break-words" style="overflow-wrap:anywhere;word-break:break-word;">${l}</p>` : '').join('')}
+            ${linksHTML}
+            <button type="button" class="jclose mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-stone-200 dark:border-stone-700 text-xs font-semibold text-stone-500 dark:text-stone-400" onclick="event.stopPropagation(); this.closest('.jnode').classList.remove('open')">收起 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+          </div>
+        </div>
+      </div>`;
+  };
+
+  let html = '<div class="journey-stage relative">';
+  let gi = 0;
+  let connectX = 0;                                       // 当前行与上一/下一行衔接的“转角边”x（相对 stage 左缘）
+  rows.forEach((row, ri) => {
+    const reversed = ri % 2 === 1;                        // 奇数行：右→左（树枝自然反向延伸）
+    const dir = reversed ? -1 : 1;                        // -1=右→左，1=左→右（蛇形交替）
+    const rowItems = reversed ? row.slice().reverse() : row;
+    const rowLen = rowItems.length;
+    const rowW = rowLen * colW + (rowLen - 1) * gap;
+    // 计算本行水平偏移，使转角边与上一行衔接（蛇形错位，但连接处 x 完全一致，不断连）
+    let leftOffset = reversed ? (connectX - rowW) : connectX;
+    leftOffset = Math.max(0, leftOffset);
+    html += `
+      <div class="jrow relative" style="margin-left:${leftOffset}px; width:${rowW}px;">
+        <div class="absolute left-0 top-0 h-[52px] pointer-events-none" style="width:${rowW}px;">${branchSVG(rowW, dir, false, reversed ? 'left' : 'right')}</div>
+        <div class="flex ${reversed ? 'justify-end' : 'justify-start'} relative z-10" style="gap:${gap}px; width:${rowW}px; max-width:100%;">${rowItems.map(e => nodeHTML(e, gi++)).join('')}</div>
+      </div>`;
+    // 本行“出口转角边”：正向行在右、反向行在左；作为行间连接器的落点（与下一行入口同 x）
+    const exitX = reversed ? (connectX - rowW) : (connectX + rowW);
+    if (ri < rowCount - 1) {
+      const side = reversed ? 'left' : 'right';
+      html += `<div class="relative" style="height:${turnH}px; width:100%;">
+        <div class="absolute pointer-events-none" style="left:${exitX}px; top:0; width:90px; height:${turnH}px; overflow:visible;">${turnSVG(turnH, side)}</div>
+      </div>`;
+    }
+    connectX = exitX;
+  });
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+
+function initJourneyResize() {
+  let t = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => { renderJourney(); observeReveal(); }, 250);
+  }, { passive: true });
+}
+
+// ==================== 详情内页（hash 路由） ====================
+const DETAIL_ICONS = {
+  text: '<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',
+  image: '<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+  video: '<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>'
+};
+
+const PAGES = {};
+function registerPages() {
+  DATA.hobbies.forEach(h => {
+    PAGES[h.id] = { title: h.name, sub: h.sub || '兴趣爱好', icon: iconByName(h.icon, 'w-7 h-7'), detail: h.detail, kind: 'hobby', theme: 'from-pink-400 to-amber-400' };
+  });
+  DATA.portfolio.filter(p => !p.placeholder && p.detail).forEach(p => {
+    PAGES[p.id] = { title: p.title, sub: p.sub || '作品集', icon: iconByName(p.icon, 'w-7 h-7'), detail: p.detail, kind: 'portfolio', theme: 'from-accent to-violet' };
+  });
+}
+
+function phBlock(icon, label, hint) {
+  return `<div class="my-4 rounded-2xl border-2 border-dashed border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800/60 px-6 py-10 flex flex-col items-center text-center">
+    <span class="text-accent mb-3">${icon}</span>
+    <span class="text-sm font-bold text-stone-600 dark:text-stone-300">${label}</span>
+    <span class="text-xs text-stone-400 dark:text-stone-500 mt-1">${hint}</span>
+  </div>`;
+}
+
+function detailHTML(d, theme) {
+  theme = theme || 'from-accent to-violet';
+  d = d || {};
+  const blocks = d.blocks && d.blocks.length ? d.blocks : null;
+  let h = '';
+  if (blocks) {
+    blocks.forEach(b => {
+      if (b.type === 'text') {
+        h += `<p class="text-base leading-relaxed text-stone-600 dark:text-stone-300 mb-5">${b.t}</p>`;
+      } else if (b.type === 'subtitle') {
+        h += `<h3 class="flex items-center gap-2.5 text-xl font-extrabold text-stone-900 dark:text-stone-100 mt-9 mb-3"><span class="w-1.5 h-6 rounded-full bg-gradient-to-b ${theme} shrink-0"></span><span>${b.t}</span></h3>`;
+      } else if (b.type === 'image') {
+        h += `<img src="${b.src}" class="w-full rounded-2xl border border-stone-200 dark:border-stone-700 my-6" alt="">`;
+      } else if (b.type === 'video') {
+        h += `<div class="my-6 rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-700 bg-stone-900"><video controls preload="metadata" src="${b.src}" class="w-full block"></video></div>`;
+      }
+    });
+    if (!h.trim()) h = phBlock(DETAIL_ICONS.text, '内容待补充', '这里暂时还没有内容');
+  } else {
+    // 兼容旧格式
+    if (d.text) {
+      (Array.isArray(d.text) ? d.text : [d.text]).forEach(t => { h += `<p class="text-base leading-relaxed text-stone-600 dark:text-stone-300 mb-5">${t}</p>`; });
+    } else { h += phBlock(DETAIL_ICONS.text, '文字区', '这里可以放入文字介绍 · 暂时留空'); }
+    if (d.images && d.images.length) {
+      h += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">${d.images.map(src => `<img src="${src}" class="w-full rounded-2xl border border-stone-200 dark:border-stone-700" alt="">`).join('')}</div>`;
+    } else { h += phBlock(DETAIL_ICONS.image, '图片区', '这里可以放入图片 · 暂时留空'); }
+    if (d.video) { h += `<video controls src="${d.video}" class="w-full rounded-2xl bg-stone-900 my-6"></video>`; }
+    else { h += phBlock(DETAIL_ICONS.video, '视频区', '这里可以放入视频 · 暂时留空'); }
+  }
+  return `<div class="max-w-[820px] mx-auto px-6 md:px-8 py-8">${h}</div>`;
+}
+
+function openDetail(id) {
+  const pg = PAGES[id];
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+  if (!pg || !overlay) return;
+  document.getElementById('detailTitle').textContent = pg.title;
+  document.getElementById('detailSub').textContent = pg.sub;
+  document.getElementById('detailIconWrap').innerHTML = pg.icon;
+  panel.dataset.kind = pg.kind || 'portfolio';
+  const body = document.getElementById('detailBody');
+  body.innerHTML = detailHTML(pg.detail, pg.theme);
+  body.scrollTop = 0;
+  overlay.classList.remove('overlay-hidden');
+  panel.classList.remove('translate-y-8', 'md:translate-y-4', 'md:scale-[0.98]');
+  document.body.classList.add('detail-open');
+}
+
+function closeDetail() {
+  const overlay = document.getElementById('detailOverlay');
+  const panel = document.getElementById('detailPanel');
+  if (!overlay) return;
+  overlay.classList.add('overlay-hidden');
+  panel.classList.add('translate-y-8', 'md:translate-y-4', 'md:scale-[0.98]');
+  document.body.classList.remove('detail-open');
+}
+
+function handleHash() {
+  const m = location.hash.match(/^#\/page\/([\w-]+)$/);
+  if (m && PAGES[m[1]]) openDetail(m[1]);
+  else closeDetail();
+}
+
+function initDetail() {
+  const overlay = document.getElementById('detailOverlay');
+  const back = document.getElementById('detailBack');
+  const goBack = () => {
+    history.pushState(null, '', location.pathname + location.search);
+    closeDetail();
+  };
+  back.addEventListener('click', goBack);
+  overlay.querySelector('[data-close-detail]').addEventListener('click', goBack);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !overlay.classList.contains('overlay-hidden')) goBack();
+  });
+  window.addEventListener('hashchange', handleHash);
+}
+
+// ==================== 交互逻辑 ====================
+function initTabs(containerSelector, callback) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  const buttons = container.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => {
+        b.classList.remove('active', 'bg-white', 'dark:bg-stone-700', 'text-stone-900', 'dark:text-stone-100', 'shadow-card', 'dark:shadow-card-dark');
+        b.classList.add('text-stone-500', 'dark:text-stone-400');
+      });
+      btn.classList.add('active', 'bg-white', 'dark:bg-stone-700', 'text-stone-900', 'dark:text-stone-100', 'shadow-card', 'dark:shadow-card-dark');
+      btn.classList.remove('text-stone-500', 'dark:text-stone-400');
+      if (callback) callback(btn.dataset.tab);
+      else {
+        const tab = btn.dataset.tab;
+        container.parentElement.querySelectorAll('.tab-panel').forEach(p => {
+          p.classList.toggle('hidden', p.dataset.panel !== tab);
+          p.classList.toggle('block', p.dataset.panel === tab);
+        });
+      }
+    });
+  });
+}
+
+function initTheme() {
+  const btn = document.getElementById('themeBtn');  const icon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const setTheme = (theme) => {
+    if (theme === 'dark') html.classList.add('dark');
+    else html.classList.remove('dark');
+    localStorage.setItem('theme', theme);
+    if (starEngine) starEngine.setActive(theme === 'dark');
+    icon.innerHTML = theme === 'dark'
+      ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>'
+      : '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+  };
+  setTheme(saved || (prefersDark ? 'dark' : 'light'));
+  btn.addEventListener('click', () => {
+    setTheme(html.classList.contains('dark') ? 'light' : 'dark');
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.remove('opacity-0', 'translate-y-20');
+  toast.classList.add('opacity-100', 'translate-y-0');
+  setTimeout(() => {
+    toast.classList.add('opacity-0', 'translate-y-20');
+    toast.classList.remove('opacity-100', 'translate-y-0');
+  }, 2000);
+}
+
+function copyText(text, btn, textEl, normalLabel, copiedLabel, confetti) {
+  navigator.clipboard.writeText(text).then(() => {
+    textEl.textContent = copiedLabel;
+    btn.classList.add('bg-emerald-600', 'dark:bg-emerald-500', 'text-white', 'border-emerald-600');
+    btn.classList.remove('bg-stone-900', 'dark:bg-stone-100', 'text-stone-50', 'dark:text-stone-900');
+    showToast('已复制到剪贴板');
+    const rect = btn.getBoundingClientRect();
+    confetti.emit(rect.left + rect.width / 2, rect.top + rect.height / 2, 60);
+    setTimeout(() => {
+      textEl.textContent = normalLabel;
+      btn.classList.remove('bg-emerald-600', 'dark:bg-emerald-500', 'text-white', 'border-emerald-600');
+      btn.classList.add('bg-stone-900', 'dark:bg-stone-100', 'text-stone-50', 'dark:text-stone-900');
+    }, 2000);
+  });
+}
+
+function initContact(confetti) {
+  const emailBtn = document.getElementById('emailBtn');
+  const emailText = document.getElementById('emailText');
+  if (emailBtn) emailBtn.addEventListener('click', () => {
+    copyText(`${emailBtn.dataset.user}@${emailBtn.dataset.domain}`, emailBtn, emailText, '复制邮箱地址', '已复制', confetti);
+  });
+  const phoneBtn = document.getElementById('phoneBtn');
+  const phoneText = document.getElementById('phoneText');
+  if (phoneBtn) phoneBtn.addEventListener('click', () => {
+    copyText(phoneBtn.dataset.phone, phoneBtn, phoneText, '15870014624', '已复制', confetti);
+  });
+  const githubBtn = document.getElementById('githubBtn');
+  if (githubBtn) githubBtn.addEventListener('click', () => {
+    showToast('GitHub 链接待补充');
+  });
+}
+
+function initScroll() {
+  const nav = document.getElementById('nav');
+  const btt = document.getElementById('btt');
+  const progressBar = document.getElementById('progressBar');
+  
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const sy = window.scrollY;
+        nav.classList.toggle('bg-white/75', sy > 50);
+        nav.classList.toggle('dark:bg-stone-950/75', sy > 50);
+        nav.classList.toggle('backdrop-blur-xl', sy > 50);
+        nav.classList.toggle('border-stone-200/80', sy > 50);
+        nav.classList.toggle('dark:border-stone-800/80', sy > 50);
+        nav.classList.toggle('shadow-sm', sy > 50);
+        btt.classList.toggle('opacity-100', sy > 500);
+        btt.classList.toggle('translate-y-0', sy > 500);
+        btt.classList.toggle('opacity-0', sy <= 500);
+        btt.classList.toggle('translate-y-5', sy <= 500);
+        
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? sy / docHeight : 0;
+        progressBar.style.transform = `scaleX(${progress})`;
+        
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+  
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+function observeReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal-item:not(.is-visible)').forEach(el => obs.observe(el));
+}
+
+function initMobileNav() {
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (!toggle || !menu) return;
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = menu.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.add('hidden');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) menu.classList.add('hidden');
+  }, { passive: true });
+}
+
+// ==================== 初始化 ====================
+document.addEventListener('DOMContentLoaded', () => {
+  document.documentElement.classList.add('js-loaded');
+  
+  new Typewriter(document.getElementById('typewriter'), [
+    "AI应用实践者",
+    "贸易经济探索者",
+    "数据分析学习者",
+    "共青团员骨干",
+    "智能商业创新者"
+  ], { speed: 120, deleteSpeed: 60, pause: 2500 });
+  
+  const confetti = new ConfettiEngine(document.getElementById('confettiCanvas'));
+  starEngine = new StarEngine(document.getElementById('starsCanvas'));
+  
+  document.querySelectorAll('.confetti-trigger').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const rect = btn.getBoundingClientRect();
+      confetti.emit(rect.left + rect.width / 2, rect.top + rect.height / 2, 60);
+    });
+  });
+  
+  renderHeroTags();
+  renderHighlights();
+  renderExp();
+  renderProjects();
+  renderSkills();
+  renderEdu();
+  renderHobbies();
+  renderPortfolio();
+  renderJourney();
+  registerPages();
+  initTabs('#expTabs');
+  initTabs('#projTabs', renderProjects);
+  initTheme();
+  initContact(confetti);
+  initScroll();
+  initMobileNav();
+  initDetail();
+  handleHash();
+  initJourneyResize();
+  observeReveal();
+});
+</script>
+
+<script>
+// ==================== 证书图片查看器（单张翻看） ====================
+let _imgList = [], _imgIdx = 0;
+function openImgViewer(list) {
+  _imgList = list || []; _imgIdx = 0;
+  if (!_imgList.length) return;
+  const lb = document.getElementById('imgLightbox');
+  lb.classList.remove('hidden'); lb.classList.add('flex');
+  document.body.classList.add('detail-open');
+  _showImg();
+}
+function _showImg() {
+  document.getElementById('imgEl').src = _imgList[_imgIdx];
+  document.getElementById('imgCounter').textContent = (_imgIdx + 1) + ' / ' + _imgList.length;
+}
+function _imgStep(dir) {
+  if (!_imgList.length) return;
+  _imgIdx = (_imgIdx + dir + _imgList.length) % _imgList.length;
+  _showImg();
+}
+function closeImgViewer() {
+  const lb = document.getElementById('imgLightbox');
+  lb.classList.add('hidden'); lb.classList.remove('flex');
+  document.body.classList.remove('detail-open');
+}
+(function initImgViewer() {
+  const lb = document.getElementById('imgLightbox');
+  if (!lb) return;
+  document.getElementById('imgStage').addEventListener('click', e => { e.stopPropagation(); _imgStep(1); });
+  document.getElementById('imgPrev').addEventListener('click', e => { e.stopPropagation(); _imgStep(-1); });
+  document.getElementById('imgNext').addEventListener('click', e => { e.stopPropagation(); _imgStep(1); });
+  document.getElementById('imgClose').addEventListener('click', e => { e.stopPropagation(); closeImgViewer(); });
+  document.getElementById('imgLightboxBg').addEventListener('click', closeImgViewer);
+  document.addEventListener('keydown', e => {
+    if (lb.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeImgViewer();
+    else if (e.key === 'ArrowRight') _imgStep(1);
+    else if (e.key === 'ArrowLeft') _imgStep(-1);
+  });
+})();
+</script>
+</body>
+</html>
